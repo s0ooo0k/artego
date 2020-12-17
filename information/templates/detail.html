@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ArtEgo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Song+Myung&display=swap" rel="stylesheet">
+
+  <style>
+    body{background-color: #DAD9D9;color: #365264;font-family: "Song Myung";}
+    header{text-align:center;font-size:50px;font-family:"Lobster", bold;padding:20px;}
+    nav{padding:5px;overflow:hidden;text-align:right;}
+    nav a{font-size:15px;display:block;color:#365264;text-decoration:none;}
+    nav li{list-style:none;display:inline-block;padding:5px;}
+    h2{font-family: "Song Myung"; font-size: 36px; font-weight: lighter;}
+    .wrapper{width: 1000px;margin: 20px auto;text-align: left;border:none;}
+    .button{color: #365264;background-color:#DAD9D9;border:0;outline:0;cursor: pointer;}
+
+    #info-container:: after{content: "";clear: both;display: table;}
+    .column{float:left; width:45%; height: 400px;margin: 10px; font-size: 20px;}
+    .column img{float: right; height: 100%;}
+
+    #info{padding: 10px;}
+    #ttl{font-weight:bold;font-size: 30px;}
+    #more{color: #44677E;}
+
+    table{
+      border-collapse:separate;
+      border-spacing:20px 0px;
+    }
+    a:link{text-decoration : none; color:black;}
+      a:visited{color:black;}
+  </style>
+</head>
+</head>
+<body>
+  <div class = "wrapper" id = "reviewPage">
+    <!--fixed UI until **---------------------------------------------->
+    <section id = "menu-container">
+        <nav>
+          <ul>
+            <li><a href="{%url 'info' %}"><i class="fa fa-fw fa-home"></i>HOME</a></li>
+            <li><a href="{% url 'event' %}"><i class="fa fa-fw fa-star"></i>EVENT</a></li>
+            <li><a href="{% url 'calendar' %}"><i class="fa fa-fw fa-calendar"></i>MY CALENDAR</a></li>
+            <li><a href="{% url 'account:logout' %}"><i class="fa fa-fw fa-user"></i>LOG OUT</a></li>
+          </ul>
+        </nav>
+        <!--Logo-->
+        <header>ArtEgo</header>
+      </section>
+      <!-- ** -------------------------------------------------------->
+      <!--title goes here-->
+
+          
+
+<div>
+  <table>
+  <caption><h1 >information</h1></caption>
+  <td>
+    <img src ="{{information.image.url}}" width=500px height=auto>
+  </td>
+  <td><label id = "ttl">{{information.title}}</label>
+    <div id = "information">
+      <p style="font-size:20px">{{information.info_data|linebreaksbr}}</p>
+
+    </div>  
+  </td>
+</table>
+</div>
+
+<div>
+    {% for comment in information.comments.all %}
+        <h3>{{comment.author_name}}</h3>
+        <p>{{comment.time}}</p>
+        <p>{{comment.comment_text}}</p>
+    {% empty %}
+    <p>No comments here yet</p>
+    {% endfor %}
+
+    <br>
+    <a href="{% url 'add_comment' information.id %}"><p style="font-size:30px"> new comment</p></a>
+
+</div>
+        </div>
+      </section>
+  </div>
+</body>
+</html>
+
+
+
